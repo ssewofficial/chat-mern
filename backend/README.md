@@ -1,0 +1,1 @@
+## "exec": "node --loader ts-node/esm src/index.mts",
