@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.mts",
-    "dev": "nodemon --watch src --exec ts-node --esm src/index.mts",
+    "start": "node --loader ts-node/esm src/index.ts --trace-warnings --trace-deprecation",
+    "dev": "nodemon",
     "build": "tsc --project tsconfig.json"
   },
   "author": "SSE Official",

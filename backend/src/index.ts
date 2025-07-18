@@ -8,8 +8,7 @@ import messageRoutes from "./routes/message.js";
 import { app, server } from "./lib/socket.js";
 import { PORT } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
-
-const __dirname = path.resolve();
+import { __dirname } from "./lib/file.js";
 
 app.use(express.json());
 app.use(cookieParser());
