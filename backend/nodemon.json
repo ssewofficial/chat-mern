@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "watch": ["src"],
+  "ext": "json,js,ts,tsx",
+  "execMap": {
+    "js": "node",
+    "ts": "node --trace-warnings --trace-deprecation --loader ts-node/esm"
+  },
+  "verbose": true,
+  "delay": "500ms",
+  "colours": true,
+  "exitcrash": true,
+  "runOnChangeOnly": false,
+  "ignore": [".gitignore"]
+}

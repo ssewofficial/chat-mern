@@ -8,7 +8,6 @@ import messageRoutes from "./routes/message.js";
 import { app, server } from "./lib/socket.js";
 import { PORT } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
-import { __dirname } from "./lib/file.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -23,14 +22,17 @@ app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.use(express.static(path.join(path.resolve(), "..", "frontend", "dist")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(
+      path.join(path.resolve(), "..", "frontend", "dist", "index.html")
+    );
   });
 }
 
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
+  console.log("Route: ", path.resolve());
   connectDB();
 });
