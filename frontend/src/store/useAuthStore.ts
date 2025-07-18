@@ -57,13 +57,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
-  login: async (data: any) => {
+  login: async (data) => {
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
       toast.success("Logged in successfully");
-
       get().connectSocket();
     } catch (error) {
       if (
@@ -148,14 +147,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         userId: authUser._id,
       },
     });
-    socket.connect();
 
+    socket.connect();
     set({ socket: socket });
 
     socket.on("getOnlineUsers", (userIds) => {
       set({ onlineUsers: userIds });
     });
   },
+
   disconnectSocket: () => {
     if (get().socket?.connected) get().socket.disconnect();
   },

@@ -1,6 +1,6 @@
-import { useChatStore } from "../store/useChatStore";
 import { useEffect, useRef } from "react";
 
+import { useChatStore } from "../store/useChatStore";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
@@ -19,6 +19,7 @@ const ChatContainer = () => {
   const { authUser } = useAuthStore();
   const messageEndRef = useRef<HTMLDivElement>(null);
 
+  if (!authUser) return;
   if (!selectedUser) return;
 
   useEffect(() => {

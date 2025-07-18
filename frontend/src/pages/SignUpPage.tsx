@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useAuthStore } from "../store/useAuthStore";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   Eye,
   EyeOff,
@@ -9,14 +10,14 @@ import {
   MessageSquare,
   User,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
+import { useAuthStore } from "../store/useAuthStore";
 import AuthImagePattern from "../components/AuthImagePattern";
-import toast from "react-hot-toast";
+import type { SignUpData } from "../types";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignUpData>({
     fullName: "",
     email: "",
     password: "",

@@ -6,6 +6,8 @@ const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
   const [selectedImg, setSelectedImg] = useState<string | ArrayBuffer | null>(null);
 
+  if (!authUser) return;
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -34,7 +36,7 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
-                src={selectedImg || authUser.profilePic || "/avatar.png"}
+                src={typeof selectedImg === "string" ? selectedImg : authUser.profilePic || "/avatar.png"}
                 alt="Profile"
                 className="size-32 rounded-full object-cover border-4 "
               />

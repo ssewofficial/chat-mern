@@ -15,7 +15,6 @@ type User = TimeStamp & {
   _id: string;
   fullName: string;
   email: string;
-  // password: string;
   profilePic: string;
 };
 
@@ -33,8 +32,19 @@ export type ChatStore = {
   setSelectedUser: (user: User | null) => void;
 };
 
+export type LoginData = {
+  email: string;
+  password: string;
+};
+
+export type SignUpData = {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
 export type AuthState = {
-  authUser: any;
+  authUser: User | null;
   isSigningUp: boolean;
   isLoggingIn: boolean;
   isUpdatingProfile: boolean;
@@ -42,8 +52,8 @@ export type AuthState = {
   onlineUsers: any[];
   socket: any;
   checkAuth: () => Promise<void>;
-  signup: (data: any) => Promise<void>;
-  login: (data: any) => Promise<void>;
+  signup: (data: SignUpData) => Promise<void>;
+  login: (data: LoginData) => Promise<void>;
   logout: () => Promise<void>;
   updateProfile: (data: any) => Promise<void>;
   connectSocket: () => void;
