@@ -23,10 +23,7 @@ export const signup: Route = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      name: {
-        first: fullName.split(" ")[0],
-        last: fullName.split(" ")[1] || "",
-      },
+      fullName,
       email,
       password: hashedPassword,
     });
@@ -37,7 +34,7 @@ export const signup: Route = async (req, res) => {
 
       res.status(201).json({
         _id: newUser._id,
-        fullName: newUser.name.first,
+        fullName: newUser.fullName,
         email: newUser.email,
         profilePic: newUser.profilePic || null,
         token: generateToken(newUser._id, res),
@@ -69,7 +66,7 @@ export const login: Route = async (req, res) => {
 
     res.status(200).json({
       _id: user._id,
-      fullName: user.name.first + " " + user.name.last,
+      fullName: user.fullName,
       email: user.email,
       profilePic: user.profilePic,
     });
@@ -81,7 +78,7 @@ export const login: Route = async (req, res) => {
 
 export const logout: Route = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.cookie("sse-auth.js.session-token", "", { maxAge: 0 });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log("Error in logout controller", error);

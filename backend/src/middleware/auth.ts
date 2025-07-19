@@ -5,7 +5,7 @@ import { Route } from "../types.js";
 export const protectRoute: Route = async (req, res, next) => {
   try {
     req.user = undefined;
-    const token = req.cookies.jwt;
+    const token = req.cookies["sse-auth.js.session-token"];
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized - Invalid Token" });
@@ -14,6 +14,7 @@ export const protectRoute: Route = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
       userId: string;
     };
+    
     if (!decoded && typeof decoded !== "object") {
       return res.status(401).json({ message: "Unauthorized - Invalid Token" });
     }

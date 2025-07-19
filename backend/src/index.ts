@@ -21,16 +21,34 @@ app.use(
 
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoutes);
-app.use("/assets", assetsRoute)
+app.use("/assets", assetsRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(path.resolve(), "..", "frontend", "dist")));
 
-  // app.get("*", (req, res) => {
-  //   res.sendFile(
-  //     path.join(path.resolve(), "..", "frontend", "dist", "index.html")
-  //   );
-  // });
+  app.get("/", (req, res) => {
+    res.sendFile(
+      path.join(path.resolve(), "..", "frontend", "dist", "index.html")
+    );
+  });
+
+  app.get("/signup", (req, res) => {
+    res.sendFile(
+      path.join(path.resolve(), "..", "frontend", "dist", "index.html")
+    );
+  });
+
+  app.get("/login", (req, res) => {
+    res.sendFile(
+      path.join(path.resolve(), "..", "frontend", "dist", "index.html")
+    );
+  });
+
+  app.get("/profile", (req, res) => {
+    res.sendFile(
+      path.join(path.resolve(), "..", "frontend", "dist", "index.html")
+    );
+  });
 }
 
 server.listen(PORT, () => {
